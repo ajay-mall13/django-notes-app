@@ -49,4 +49,28 @@ stage("Docker deploy") {
 
 
     }
+
+post{
+        success{
+            script{
+                emailext from: 'ajayup8082@gmail.com',
+                to: 'ajayup8082@gmail.com',
+                body: 'Build success for Demo CICD App',
+                subject: 'Build success for Demo CICD App'
+            }
+        }
+        failure{
+            script{
+                emailext from: 'ajayup8082@gmail.com',
+                to: 'ajayup8082@gmail.com',
+                body: 'Build Failed for Demo CICD App',
+                subject: 'Build Failed for Demo CICD App'
+            }
+        }
+    }
+
+
+
+
+    
 }
