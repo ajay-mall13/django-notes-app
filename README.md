@@ -1,5 +1,27 @@
-# Simple Notes App 
-This is a simple notes app built with React and Django.
+# CI/CD Pipeline Overview for Simple Notes App
+
+I have developed a fully robust CI/CD pipeline for a Django-React based Notes App. This pipeline automates the entire process from code push to deployment using the following components:
+
+- **Dockerized Setup**: Both frontend (React) and backend (Django) are containerized using Docker.
+- **Declarative Jenkins Pipeline**: Built using a Jenkinsfile with Declarative syntax for better readability and maintainability.
+
+## Stages in Pipeline:
+
+- SCM Checkout
+- Docker Image Build
+- Automated Testing
+- Push to DockerHub
+- Deployment to server
+- Post-build Actions
+
+- **GitHub Webhook Integration**: Automatically triggers Jenkins build on every push to the GitHub repository.
+- **DockerHub Integration**: Built images are pushed to DockerHub and pulled by the deployment server.
+- **Email Notification**: Sends build status alerts (success/failure) after each run.
+- **Efficient Runtime**: Average total pipeline runtime is ~33 seconds as seen in the Jenkins Stage View.
+
+This setup ensures smooth, automated, and error-free deployment, making the project DevOps-ready and production-friendly.
+
+
 
 ## Requirements
 1. Python 3.9
@@ -210,7 +232,7 @@ This image is automatically built and deployed through the Jenkins pipeline.
 ### 🔁 End-to-end Jenkins Pipeline  
 Triggered by GitHub pushes — automates pull → build → push to Docker Hub → deploy on EC2 using `docker-compose`.
 
-<img width="1084" height="553" alt="Screenshot 2025-08-03 100800" src="https://github.com/user-attachments/assets/92f728cb-55c1-41ba-8734-4321b5614ac4" />
+<img width="1500" height="639" alt="Screenshot 2025-08-05 111717" src="https://github.com/user-attachments/assets/dc46147e-4365-4a4e-b8d8-df65181b19ee" />
 
 
 
@@ -218,7 +240,7 @@ Triggered by GitHub pushes — automates pull → build → push to Docker Hub �
 
 ### 🗄️ rules in AWS
 
-<img width="1882" height="869" alt="image" src="https://github.com/user-attachments/assets/4942f23b-f5cb-48f7-868e-2765e2da7c88" />
+<img width="1917" height="951" alt="Screenshot 2025-08-05 112426" src="https://github.com/user-attachments/assets/74b3270c-55a8-446c-9e73-b29916cefdfd" />
 
 <img width="1919" height="715" alt="image" src="https://github.com/user-attachments/assets/d981c2f5-e0d8-4293-97fd-68b484e06d10" />
 
@@ -250,6 +272,19 @@ User-submitted messages are stored and fetched from the database in real time.
 
 ---
 
+### 🗄️ Emil Notification 
+<img width="1919" height="956" alt="Screenshot 2025-08-05 112710" src="https://github.com/user-attachments/assets/9d488c7f-7d3c-48bc-82ce-1b00b5aa4055" />
+
+
+<img width="1915" height="822" alt="Screenshot 2025-08-05 112336" src="https://github.com/user-attachments/assets/a1c01d7a-34e4-43a0-a08c-d4394a2b7c24" />
+
+<img width="1078" height="548" alt="Screenshot 2025-08-05 112206" src="https://github.com/user-attachments/assets/c7ff0e51-b12c-40f3-b89d-199b32a917b9" />
+
+
+
+
+
+
 ---
 
 ## 🔁 CI/CD Flow Summary
@@ -262,6 +297,7 @@ Jab bhi koi developer GitHub par `git push` karta hai:
 4. **Docker Build**: Jenkins Docker image banata hai Flask app ke liye
 5. **Push to Docker Hub**: Jenkins Docker image ko DockerHub par push karta hai
 6. **Deploy via Docker Compose**: Remote server par Docker Compose file run karke Nginx + Django + Mysql containers deploy karta hai
+7. **Email Notification: Jenkins deployment ke baad developer ko build status (Success/Failure) ka email bhejta hai
 
 ---
 
