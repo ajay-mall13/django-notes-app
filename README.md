@@ -1,4 +1,3 @@
-# CI/CD Pipeline Overview for Simple Notes App
 
 I have developed a fully robust CI/CD pipeline for a Django-React based Notes App. This pipeline automates the entire process from code push to deployment using the following components:
 
@@ -8,6 +7,7 @@ I have developed a fully robust CI/CD pipeline for a Django-React based Notes Ap
 ## Stages in Pipeline:
 
 - SCM Checkout
+- Trivy Security Scan: Performs a file system scan using Trivy to detect vulnerabilities before building the Docker image
 - Docker Image Build
 - Automated Testing
 - Push to DockerHub
@@ -232,7 +232,8 @@ This image is automatically built and deployed through the Jenkins pipeline.
 ### 🔁 End-to-end Jenkins Pipeline  
 Triggered by GitHub pushes — automates pull → build → push to Docker Hub → deploy on EC2 using `docker-compose`.
 
-<img width="1500" height="639" alt="Screenshot 2025-08-05 111717" src="https://github.com/user-attachments/assets/dc46147e-4365-4a4e-b8d8-df65181b19ee" />
+<img width="1909" height="961" alt="Screenshot 2025-08-05 115805" src="https://github.com/user-attachments/assets/b6c9b820-e1ec-4a27-bff7-6aad1a6d13c7" /># CI/CD Pipeline Overview for Simple Notes App
+
 
 
 
@@ -242,7 +243,7 @@ Triggered by GitHub pushes — automates pull → build → push to Docker Hub �
 
 <img width="1917" height="951" alt="Screenshot 2025-08-05 112426" src="https://github.com/user-attachments/assets/74b3270c-55a8-446c-9e73-b29916cefdfd" />
 
-<img width="1919" height="715" alt="image" src="https://github.com/user-attachments/assets/d981c2f5-e0d8-4293-97fd-68b484e06d10" />
+<img width="1918" height="906" alt="Screenshot 2025-08-05 120112" src="https://github.com/user-attachments/assets/413a5786-c34c-4fc1-95e0-87958170196a" />
 
 
 
@@ -293,11 +294,12 @@ Jab bhi koi developer GitHub par `git push` karta hai:
 
 1. **SCM Trigger**: GitHub webhook se Jenkins ko signal milta hai
 2. **Code Checkout**: Jenkins GitHub se latest code clone karta hai
-3. **Build**: Flask app ke liye dependencies install karta hai / test run karta hai
-4. **Docker Build**: Jenkins Docker image banata hai Flask app ke liye
-5. **Push to Docker Hub**: Jenkins Docker image ko DockerHub par push karta hai
-6. **Deploy via Docker Compose**: Remote server par Docker Compose file run karke Nginx + Django + Mysql containers deploy karta hai
-7. **Email Notification: Jenkins deployment ke baad developer ko build status (Success/Failure) ka email bhejta hai
+3. **Trivy File System Scan: Jenkins trivy fs . -o results.json command se security vulnerabilities ke liye codebase scan karta hai
+4. **Build**: Flask app ke liye dependencies install karta hai / test run karta hai
+5. **Docker Build**: Jenkins Docker image banata hai Flask app ke liye
+6. **Push to Docker Hub**: Jenkins Docker image ko DockerHub par push karta hai
+7. **Deploy via Docker Compose**: Remote server par Docker Compose file run karke Nginx + Django + Mysql containers deploy karta hai
+8. **Email Notification: Jenkins deployment ke baad developer ko build status (Success/Failure) ka email bhejta hai
 
 ---
 
